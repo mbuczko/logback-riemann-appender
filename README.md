@@ -14,8 +14,7 @@ rendered message                | `:log/message`
 `level`                         | added as a custom attribute: `:log/level`
 Marker name                     | prefixed with `log/` and added to `:tags`
 each key-value pair in the MDC  | added as a custom attribute with key in the `:log` ns
-throwableProxy, if it exists    | custom attribute: `:log/stacktrace`
-                                | custom attribute: `:log/cause`
+throwableProxy, if it exists    | custom attribute: `:log/stacktrace`, custom attribute: `:log/cause`
 name of the logger              | custom attribute: `:log/logger`
 
 :host and :service are set via configuring `logback.xml` as below. You
