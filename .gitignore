@@ -13,3 +13,6 @@ pom.xml.asc
 *.ipr
 *~
 gpg.edn
+.nrepl-history
+.projectile
+TAGS
