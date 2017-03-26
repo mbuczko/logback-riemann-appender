@@ -1,12 +1,11 @@
 # logback-riemann-appender  [![Build Status](https://travis-ci.org/walmartlabs/logback-riemann-appender.svg?branch=master)](https://travis-ci.org/walmartlabs/logback-riemann-appender)
 
-Forked from: https://github.com/kyleburton/logback-riemann-appender
+Forked from: https://github.com/walmartlabs/logback-riemann-appender
 
 ## Logback appender for [Riemann](http://riemann.io/)
 
-- Sends logging events to Riemann via UDP
-- Supports configurable level-based filtering of log events via the
-  `riemannLogLevel` config property
+- Sends logging events to Riemann via UDP/TCP
+- Supports configurable level-based filtering of log events via the `riemannLogLevel` config property
 - Maps attributes of the log event to a Riemann event as follows:
 
 Log Event                       | Riemann Event
@@ -16,6 +15,7 @@ rendered message                | `:log/message`
 Marker name                     | prefixed with `log/` and added to `:tags`
 each key-value pair in the MDC  | added as a custom attribute with key in the `:log` ns
 throwableProxy, if it exists    | custom attribute: `:log/stacktrace`
+                                | custom attribute: `:log/cause`
 name of the logger              | custom attribute: `:log/logger`
 
 :host and :service are set via configuring `logback.xml` as below. You
@@ -26,8 +26,7 @@ the custom attributes will be in the `log` namespace.
 ## Usage
 
 Artifacts are available through
-[clojars](https://clojars.org/com.walmartlabs/logback-riemann-appender) which you can add
-to your maven repository like so:
+[clojars](https://clojars.org/defunkt/logback-riemann-appender) which you can add to your maven repository like so:
 
 ```xml
 <repository>
@@ -39,9 +38,9 @@ to your maven repository like so:
 See `resources/logback.xml` for a full example configuration.
 
     <configuration scan="true">
-      <appender name="R1" class="com.walmartlabs.logback.RiemannAppender">
+      <appender name="R1" class="pl.defunkt.logback.RiemannAppender">
         <serviceName>Test Service</serviceName>
-        <riemannHostname>127.0.0.1</riemannHostname>
+        <riemannHostName>127.0.0.1</riemannHostName>
         <riemannPort>5555</riemannPort>
         <hostname>graphene</hostname>
         <customAttributes>application:test-service,datacenter:us-sw</customAttributes>
@@ -51,6 +50,14 @@ See `resources/logback.xml` for a full example configuration.
         <appender-ref ref="R1"/>
       </root>
     </configuration>
+
+## Build
+
+Project is under [boot](http://boot-clj.com/) control. To make a jar:
+
+``` shell
+boot javac build-jar
+```
 
 ## License
 
