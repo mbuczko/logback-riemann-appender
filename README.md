@@ -41,7 +41,7 @@ See `resources/logback.xml` for a full example configuration.
         <serviceName>Test Service</serviceName>
         <riemannHostName>127.0.0.1</riemannHostName>
         <riemannPort>5555</riemannPort>
-        <hostname>graphene</hostname>
+        <hostName>graphene</hostName>
         <customAttributes>application:test-service,datacenter:us-sw</customAttributes>
 		<riemannLogLevel>WARN</riemannLogLevel>
       </appender>
